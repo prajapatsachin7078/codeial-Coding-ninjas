@@ -2,8 +2,13 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
+// use ejs as a view engine
+app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+app.set('views','./views');
+
 // use express router
-app.use('/',require('./routes/index'));
+app.use('/',require('./routes/'));
 
 app.listen(port, function(err){
     if(err){
