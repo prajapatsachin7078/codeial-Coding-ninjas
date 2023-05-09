@@ -12,7 +12,7 @@ passport.use(new LocalStrategy(
         User.findOne({ email: email })
         .then(function(user){
             if(!user || user.password != password) {
-                console.log('Invalikd username/password mismatch');
+                console.log('Invalid username/password mismatch');
                 return done(null,false);
             }
             return done(null,user);
