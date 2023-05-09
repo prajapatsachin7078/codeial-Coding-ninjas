@@ -28,6 +28,10 @@ module.exports.profile = function(req, res){
 
 // Render sign up page
 module.exports.signUp = function(req, res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     return res.render('user_sign_up', {
         title: 'Codeial | Sign Up'
     });
@@ -35,6 +39,11 @@ module.exports.signUp = function(req, res){
 
 // Render sign in page
 module.exports.signIn = function(req, res){
+
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     return res.render('user_sign_in', {
         title: 'Codeial | Sign In'
     });
@@ -73,26 +82,6 @@ module.exports.create = function(req, res){
 
 // Create new session for user upon sign in
 module.exports.createSession = function(req, res){
-    // Find user with email
-    User.findOne({email:req.body.email})
-    .then(function(user){
-        // Handle success/User found
-        if(user){
-            // Handle incorrect password
-            if(req.body.password != user.password){
-                return res.redirect('back');
-            }
-            // Handle session creation
-            res.cookie('user_id', user.id);
-            return res.redirect('/users/profile');
-        }
-        // Handle user not found
-        else{
-            return res.redirect('back');
-        }
-    })
-    .catch(function(err){
-        console.error('Error in signing in the user',err);
-        return;
-    });
+  // to do now
+  return res.redirect('/');
 };
