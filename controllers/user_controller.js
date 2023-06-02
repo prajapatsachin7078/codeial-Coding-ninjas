@@ -1,87 +1,71 @@
 const User = require('../models/user');
 
-// Render user profile if user is logged in
-module.exports.profile = function(req, res){
-    // Check if user is logged in
-    if(req.cookies.user_id){
-        User.findById(req.cookies.user_id)
-        .then(function(user){
-            // If user is found, render user profile page
-            if(user){
-                return res.render('user_profile', {
-                    title: 'User Profile',
-                    user: user
-                });
-            }
-            // If user not found, redirect to sign in page
-            return res.redirect('/users/sign-in');
-        })
-        .catch(function(err){
-            console.error('Error in finding user', err);
-            return res.redirect('/users/sign-in');
-        });
-    } else {
-        // If user not logged in, redirect to sign in page
-        return res.redirect('/users/sign-in');
-    }
-};
 
-// Render sign up page
+module.exports.profile = function(req, res){
+    return res.render('user_profile', {
+        title: 'User Profile'
+    })
+}
+
+
+// render the sign up page
 module.exports.signUp = function(req, res){
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()){
         return res.redirect('/users/profile');
     }
+
 
     return res.render('user_sign_up', {
-        title: 'Codeial | Sign Up'
-    });
-};
+        title: "Codeial | Sign Up"
+    })
+}
 
-// Render sign in page
+
+// render the sign in page
 module.exports.signIn = function(req, res){
 
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()){
         return res.redirect('/users/profile');
     }
-
     return res.render('user_sign_in', {
-        title: 'Codeial | Sign In'
-    });
-};
+        title: "Codeial | Sign In"
+    })
+}
 
-// Create new user with sign up data from browser
+// get the sign up data
 module.exports.create = function(req, res){
-    // Check if password matches confirm password
-    if(req.body.password != req.body.confirm_password){
+    if (req.body.password != req.body.confirm_password){
         return res.redirect('back');
     }
 
-    // Find user with email
-    User.findOne({email: req.body.email})
-    .then(function(user){
-        // If user not found, create new user and redirect to sign in page
-        if(!user){
-            User.create(req.body)
-                .then(function(user){
-                    return res.redirect('/users/sign-in')
-                })
-                .catch(function(err){
-                    console.error('Error in creating user', err);
-                    return;
-                })
-        } else {
-            // If user found, redirect to sign up page
+    User.findOne({email: req.body.email}, function(err, user){
+        if(err){console.log('error in finding user in signing up'); return}
+
+        if (!user){
+            User.create(req.body, function(err, user){
+                if(err){console.log('error in creating user while signing up'); return}
+
+                return res.redirect('/users/sign-in');
+            })
+        }else{
             return res.redirect('back');
         }
-    })
-    .catch(function(err){
-        console.error('Error in finding user', err);
-        return;
-    })
-};
 
-// Create new session for user upon sign in
+    });
+}
+
+
+// sign in and create a session for the user
 module.exports.createSession = function(req, res){
-  // to do now
-  return res.redirect('/');
-};
+    return res.redirect('/');
+}
+
+module.exports.destroySession = function(req, res){
+    req.logout(function(err){
+        if(err){
+            console.log('Error in logging out:', err);
+            return;
+        }
+        return res.redirect('/');
+    });
+}

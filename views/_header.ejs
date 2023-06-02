@@ -1,3 +1,26 @@
 <header>
-    Body Header
+    <nav class="navbar">
+        <div class="navbar-brand">Body Header</div>
+        <ul class="navbar-nav">
+            <% if (locals.user) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">
+                        <span class="navbar-text text-success">
+                            <%= user.name %>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/sign-out">Sign Out</a>
+                </li>
+            <% } else { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/sign-in">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/sign-up">Sign Up</a>
+                </li>
+            <% } %>
+        </ul>
+    </nav>
 </header>

@@ -1,7 +1,19 @@
-body{
-    margin: 0;
-    background-color: #1c1c80;
-    /* opacity: .5; */
-    color: white;
-    text-align: center;
-}
+.container {
+  margin-top: 50px; }
+  .container .row .col-md-6 {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; }
+    .container .row .col-md-6 .bg-primary {
+      width: 100%;
+      padding: 20px; }
+      .container .row .col-md-6 .bg-primary h1 {
+        color: #fff;
+        font-size: 24px;
+        margin-bottom: 10px; }
+      .container .row .col-md-6 .bg-primary p {
+        color: #fff;
+        font-size: 16px;
+        margin-bottom: 5px; }
