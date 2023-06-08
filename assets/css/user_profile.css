@@ -2,7 +2,6 @@
   margin-top: 50px; }
   .container .row .col-md-6 {
     margin: 0 auto;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 300px; }
