@@ -1,18 +1,15 @@
 .container {
-  margin-top: 50px; }
-  .container .row .col-md-6 {
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    height: 300px; }
-    .container .row .col-md-6 .bg-primary {
-      width: 100%;
-      padding: 20px; }
-      .container .row .col-md-6 .bg-primary h1 {
-        color: #fff;
-        font-size: 24px;
-        margin-bottom: 10px; }
-      .container .row .col-md-6 .bg-primary p {
-        color: #fff;
-        font-size: 16px;
-        margin-bottom: 5px; }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; }
+  .container .row .bg-primary {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: royalblue; }
+    .container .row .bg-primary h1 {
+      font-size: 24px;
+      margin-bottom: 10px; }
+    .container .row .bg-primary p {
+      font-size: 18px;
+      margin-bottom: 5px; }

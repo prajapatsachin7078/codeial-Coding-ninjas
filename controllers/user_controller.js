@@ -20,6 +20,11 @@ module.exports.signUp = function(req, res){
     })
 }
 
+module.exports.home = function (req, res){
+    // if(req.isAuthenticated()){
+        return res.redirect('/');
+    // }
+}
 
 // render the sign in page
 module.exports.signIn = function(req, res){
