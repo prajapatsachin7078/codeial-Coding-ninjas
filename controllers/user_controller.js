@@ -2,9 +2,27 @@ const User = require('../models/user');
 
 
 module.exports.profile = function(req, res){
-    return res.render('user_profile', {
-        title: 'User Profile'
-    })
+    User.findById(req.params.id).then(function(user){
+        return res.render('user_profile', {
+            title: 'User Profile',
+            profile_user: user
+        })
+    }).catch(function(err){
+        console.log("Error in fetching user profile")
+    });
+    
+}
+
+module.exports.update = function(req, res){
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, req.body).then(function(user){
+            return res.redirect('back');
+        }).catch(function(err){
+            console.log("Error in updating user", err);
+        });
+    }else{
+        return res.status(401).send('Unauthorized');
+    }
 }
 
 

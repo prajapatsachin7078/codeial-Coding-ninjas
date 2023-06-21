@@ -1,0 +1,16 @@
+.comment-item {
+  margin-bottom: 10px; }
+  .comment-item p {
+    margin: 0; }
+    .comment-item p small {
+      font-size: 12px; }
+  .comment-item small {
+    display: inline-block;
+    margin-left: 10px; }
+  .comment-item a {
+    color: #999;
+    text-decoration: none; }
+    .comment-item a:hover {
+      color: #555; }
+  .comment-item .fas {
+    margin-right: 5px; }

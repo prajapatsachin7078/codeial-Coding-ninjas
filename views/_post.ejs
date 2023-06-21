@@ -1,9 +1,8 @@
-<li>
+<li class="post-item">
     <p>
         <% if(locals.user && locals.user.id == post.user.id){ %>
-
         <small>
-            <a href="/posts/destroy/<%= post.id %>">Delete Post</a>
+            <a href="/posts/destroy/<%= post.id %>"><i class="fas fa-trash-alt"></i></a>
         </small>
         <% } %>
         <%= post.content %>
@@ -14,29 +13,17 @@
     </p>
     <div class="post-comment">
         <% if(locals.user){ %>
-            <form action="/comments/create" method="post">
-                <input type="text" name="content" placeholder="Type here to add commment.. ">
-                <input type="hidden" name="post" value="<%= post._id %>">
-                <input type="submit" value="Add Comment">
-            </form>
+        <form action="/comments/create" method="post">
+            <input type="text" name="content" placeholder="Type here to add comment.. ">
+            <input type="hidden" name="post" value="<%= post._id %>">
+            <input type="submit" value="Add Comment">
+        </form>
         <% } %>
-
         <div class="post-comments-list">
-            <ul id = "post-comments-<%= post._id %>">
+            <ul id="post-comments-<%= post._id %>">
                 <% for(comment of post.comments) { %>
-                    <p>
-                        <% if(locals.user && locals.user.id == comment.user.id){ %>
-
-                            <small>
-                                <a href="/comments/destroy/<%= comment.id %>">Delete comment</a>
-                            </small>
-                            <% } %>
-                        <%= comment.content %>
-                        <br>
-                        <small>
-                            <%= comment.user.name %>
-                        </small>
-                    </p>
+                <!-- Comments  -->
+                <%- include('_comment'); %>
                 <% } %>
             </ul>
         </div>

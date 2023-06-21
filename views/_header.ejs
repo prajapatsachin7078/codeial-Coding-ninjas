@@ -10,7 +10,7 @@
         <ul class="navbar-nav">
             <% if (locals.user) { %>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/profile">
+                    <a class="nav-link" href="/users/profile/<%= user.id %>">
                         <span class="navbar-text text-success">
                             <%= user.name %>
                         </span>
